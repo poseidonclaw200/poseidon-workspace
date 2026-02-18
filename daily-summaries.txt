@@ -1,0 +1,19 @@
+**Date:** Wednesday, February 18, 2026
+**Summary:** Heavy work on the CurtisDynamics website — major UI polish and a full client portal dashboard were built and committed today. Three commits by Poseidon, one by Riley. The client portal is the biggest single addition to the project so far.
+**Changes Made:**
+- **CurtisDynamics — UI overhaul** (commit 7f3a647, 05:10 UTC):
+  - Home page redesigned with warm light mode (stone-50 backgrounds, gradient hero with decorative blur blobs)
+  - Full dark mode support via Tailwind `darkMode: 'media'` — auto-switches with system preference
+  - Eyebrow labels, polished inputs, consistent card styles across light/dark
+- **CurtisDynamics — Icon hover cleanup** (commit bd36861, 05:23 UTC):
+  - Ported icon hover effects to home.jinja2 (group-hover blue highlight on service cards)
+  - Deleted stale index.jinja2 (superseded by home.jinja2)
+- **CurtisDynamics — Client portal dashboard** (commit f168c52, 05:52 UTC):
+  - 4 new models: `ClientProfile`, `Project`, `Appointment`, `Invoice`
+  - Full Django admin config with fieldsets, inlines, filters, and collapsible sections
+  - 6 new views + URLs under `/dashboard/`: login, logout, overview, projects, appointments, payments
+  - Jinja2 templates with sticky sidebar (desktop) + bottom tab bar (mobile), full dark mode
+- **CurtisDynamics — Initial migration** (commit 64192c5, Riley, Feb 17 MT):
+  - `0001_initial.py` generated for core app models (112 lines)
+- **daily-summaries.txt** created (first entry — this file)
+---

@@ -1,0 +1,8 @@
+# Poseidon's TODO List
+
+## Active Tasks
+- Monitor heartbeat token usage and report findings
+- Review daily summaries and update MEMORY.md with insights
+
+## Completed
+(none yet - fresh start)
