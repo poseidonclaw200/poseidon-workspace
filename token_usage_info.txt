@@ -33,3 +33,42 @@ Identical task, run twice each model for consistency.
 |------|------|-------|--------|-------|
 | 2026-02-17 | README summary test | Haiku avg | 12,700 | baseline |
 | 2026-02-17 | README summary test | Sonnet avg | 10,850 | baseline |
+
+---
+## Analysis: Feb 18, 2026 — Cost Review
+
+### Context Window (Main Session)
+- Current size: **85k / 200k tokens (42%)** — growing daily
+- Every heartbeat + message loads this full context as input
+
+### Heartbeat Cost (Primary Driver)
+- Frequency: every **30 minutes** = ~48 polls/day
+- Most fire as `HEARTBEAT_OK` — useful work only at 8 AM + 5 PM Denver
+- Each poll loads full context (system prompt + 7 project files + conversation history)
+- **~46 wasted polls/day** doing nothing but loading context
+
+### Active Cron Jobs (Daily)
+| Job | Schedule | Runtime (observed) | Notes |
+|-----|----------|-------------------|-------|
+| Daily Summary Report | 6:00 AM Denver | 19–59s | Isolated session |
+| Security Audit | 6:00 AM Denver | ~30s | Isolated session |
+| daily-work-summary | 11:50 PM Denver | ~51s | Isolated session |
+| Workspace Backup | 2:00 AM Denver | ~10s | Isolated session |
+| Update Check | 8 PM Sun (weekly) | ~10s | Isolated session |
+
+### Key Findings
+1. **Heartbeats are the #1 cost** — 48/day, nearly all HEARTBEAT_OK, each loads 85k+ context
+2. **Main session context grows unboundedly** — every heartbeat and conversation adds to it
+3. **Two cron jobs run at the same time** (Daily Summary Report + Security Audit at 6 AM) — slight overlap but not a problem
+4. **daily-work-summary + Daily Summary Report** are two separate jobs doing related work — potential for consolidation
+
+### Recommendations
+1. **Reduce heartbeat to every 60 min** — cuts heartbeat cost ~50%, still responsive
+2. **Trim/compact main session** — cap context growth; older conversation history isn't needed for HEARTBEAT_OK
+3. **Combine summary jobs** — daily-work-summary (11:50 PM) generates content; Daily Summary Report (6 AM) reads it. These could merge or be simplified
+4. **Scope heartbeats better** — HEARTBEAT.md only defines 2 actual check windows; others are pure overhead
+
+### Estimated Impact of Rec #1 (hourly heartbeats)
+- Current: ~48 polls/day
+- Proposed: ~24 polls/day
+- Reduction: ~50% of heartbeat token cost
