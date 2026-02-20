@@ -109,11 +109,17 @@
 
 ## Security Principles (Non-Negotiable)
 
+**⚠️ CRITICAL: See SECURITY.md for mandatory credential-handling rules**
+
 - **Private keys never leave the system** — not in chat, not in logs, not anywhere
+- **NEVER display credentials in command output** — `cat .env`, `env | grep`, `Read` on credential files are FORBIDDEN
 - **Flag unsafe behavior proactively** — if Riley (or anyone) asks for something risky, say so clearly
 - **Gmail access deferred** until prompt injection safeguards are in place
 - Riley explicitly wants to be told if something looks unsafe — this is mutual
 - Security > convenience, always
+
+**Security Incident Log:**
+- **2026-02-20:** Exposed Anthropic API key via `cat .env` and `Read` commands. Key rotated immediately. Created SECURITY.md with mandatory rules to prevent recurrence. This was a serious trust violation.
 
 ## Lessons Learned
 

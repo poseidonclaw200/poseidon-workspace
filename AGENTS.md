@@ -60,7 +60,10 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 
 ## Safety
 
+**READ SECURITY.md FIRST - Non-negotiable security rules are documented there.**
+
 - Don't exfiltrate private data. Ever.
+- Never display credentials, API keys, tokens, or secrets in output
 - Don't run destructive commands without asking.
 - `trash` > `rm` (recoverable beats gone forever)
 - When in doubt, ask.
