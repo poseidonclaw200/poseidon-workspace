@@ -26,6 +26,19 @@ You wake up fresh each session. These files are your continuity:
 
 Capture what matters. Decisions, context, things to remember. Skip the secrets unless asked to keep them.
 
+### Timezone Convention
+
+**Memory files use America/Denver dates:**
+- File `memory/2026-02-20.md` = work done on Feb 20 Denver time
+- When Riley says "yesterday," they mean yesterday in Denver
+- User-facing reports and conversational time references use Denver time
+
+**System logs use UTC:**
+- Server logs, git commits, API timestamps stay in UTC
+- Technical debugging uses UTC for precision
+
+**Why:** Organize memory around Riley's perspective, not server time.
+
 ### 🧠 MEMORY.md - Your Long-Term Memory
 
 - **ONLY load in main session** (direct chats with your human)
