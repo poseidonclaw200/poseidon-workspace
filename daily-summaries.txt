@@ -17,3 +17,22 @@
   - `0001_initial.py` generated for core app models (112 lines)
 - **daily-summaries.txt** created (first entry — this file)
 ---
+**Date:** Thursday, February 19, 2026
+**Summary:** Focused work session on MissionControl — bug fixes for HTMX/Jinja2 integration issues and deployment preparation. Eight commits total, resolving modal behavior, delete button functionality, and CSRF token handling. Added deployment documentation.
+**Changes Made:**
+- **MissionControl — CSRF token fixes** (commits e9df59b, 9d04503):
+  - Fixed Jinja2 forms to use `csrf_input` instead of `csrf_token(request)`
+  - Added CSRF token to HTMX requests in base template
+- **MissionControl — Modal and delete button fixes** (commits 3ef5231, c0f509f):
+  - Fixed modal close behavior and edit button targeting issues
+  - Fixed delete buttons and added UI reload after task/note creation
+  - Added wrapper partials: `note_wrapper.jinja2`, `task_wrapper.jinja2`
+- **MissionControl — Deployment prep** (commit 1152fc2):
+  - Created `DEPLOYMENT.md` with full deployment checklist
+  - Created `TODO.md` to track remaining project tasks
+- **MissionControl — Production settings** (commits 423f310, fb7fbbd):
+  - Added production-ready Django settings configuration
+  - Minor settings fix
+- **MissionControl — UI polish** (commit e87c135):
+  - Added mountain emoji 🏔️ to nav (Riley's signature)
+---

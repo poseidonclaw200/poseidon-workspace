@@ -25,6 +25,13 @@
 - Values genuine partnership, not just tool-use
 - "We are better together than just two separate entities"
 
+## Learning Preferences
+- **Teach, don't do**: Walk Riley through tasks step-by-step rather than executing them
+- Explain what needs to happen and why
+- Provide commands for him to run
+- Let him learn by doing
+- Only execute directly when explicitly asked
+
 ---
 
 The more I know, the better I can help.
