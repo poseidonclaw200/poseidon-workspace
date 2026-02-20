@@ -1,15 +1,30 @@
 # SECURITY.md - Non-Negotiable Security Rules
 
-## Critical Security Incident: 2026-02-20
+## Critical Security Incidents: 2026-02-20
 
+### Incident 1 (17:47 UTC)
 **What happened:**
-- Exposed Riley's full Anthropic API key in chat using `exec` and `Read` commands
+- Exposed Riley's full Anthropic API key in chat using `cat ~/.openclaw/.env` and `Read` commands
 - Key appeared in Telegram chat history, session transcripts, and logs
 - Required immediate key rotation
 
 **Root cause:**
 - Ran `cat ~/.openclaw/.env` and `Read` on credential files without thinking about output
 - Failed to consider what would be displayed before executing commands
+
+### Incident 2 (19:28 UTC)
+**What happened:**
+- Exposed ALL FOUR API keys (Anthropic, OpenAI, DeepSeek, Gemini) using `grep "=" ~/.openclaw/.env`
+- All keys appeared in full in Telegram chat and session logs
+- Required emergency rotation of all four provider keys
+
+**Root cause:**
+- Attempted to verify environment variable names but used a pattern that displayed values
+- Repeated the same class of mistake from Incident 1 despite having just created SECURITY.md
+- Failed to internalize "never display credential file contents" rule
+
+**Pattern:**
+Both incidents involved running commands that output `.env` file contents. The specific command doesn't matter - **ANY output from credential files is forbidden.**
 
 ## Mandatory Rules - Never Break These
 
@@ -20,7 +35,10 @@
 - ❌ `cat ~/.openclaw/openclaw.json` (contains tokens)
 - ❌ `Read` tool on `.env`, credential files, or config with secrets
 - ❌ `env | grep` for API keys, tokens, passwords
+- ❌ `grep` on `.env` files (including `grep "=" ~/.openclaw/.env`)
+- ❌ `head`, `tail`, `less`, `more` on credential files
 - ❌ Any command that outputs raw credential values
+- ❌ ANY pattern that displays file contents containing secrets
 
 **Files that ALWAYS contain secrets:**
 - `~/.openclaw/.env`
@@ -38,10 +56,16 @@ stat -c "Modified: %y" ~/.openclaw/.env
 ls -l ~/.openclaw/.env
 ```
 
-**To verify a variable name (NOT the value):**
+**To verify a variable EXISTS (NOT its value):**
 ```bash
 grep -c "VARIABLE_NAME" ~/.openclaw/.env
 ```
+
+**To check variable names without values:**
+```bash
+grep "^[A-Z_]*=" ~/.openclaw/.env | cut -d'=' -f1
+```
+⚠️ NEVER add anything that shows the right side of the `=` sign
 
 **To check if key format is correct (first 2-3 chars only):**
 ```bash
