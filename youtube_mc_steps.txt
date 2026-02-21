@@ -1,0 +1,210 @@
+ Prompt 01
+The Foundation
+
+This mega-prompt builds your complete Mission Control dashboard from scratch — a premium dark-theme command center with live data, smooth animations, and persistent storage. One prompt, one file, zero dependencies.
+What You'll Get
+
+A 2000+ line, production-quality HTML file containing:
+
+✦  Dark glassmorphism theme with frosted-glass cards and subtle glow effects
+✦  Sticky header with navigation tabs, live clock, and status indicator
+✦  Dashboard tab — Welcome greeting, 4 metric cards, activity feed, priorities
+✦  Projects tab — Full Kanban board (Backlog → In Progress → Done)
+✦  Timeline tab — Phase-based roadmap with milestones
+✦  Notes tab — Quick capture with auto-save
+✦  All data persisted to localStorage — nothing lost on refresh
+✦  Keyboard shortcut (Cmd+K) for search, responsive design, smooth animations
+Variables to Fill In
+Variable
+What to Enter
+[YOUR_NAME]
+Your first name (used in the welcome greeting)
+[YOUR_BUSINESS]
+Your company or project name
+[YOUR_ROLE]
+Your title — CEO, Creator, Developer, etc.
+[MAIN_GOAL]
+Your primary goal (e.g., "Hit $10K MRR")
+[GOAL_DEADLINE]
+Target date (e.g., "December 2025")
+[GOAL_METRIC]
+The key number you're tracking
+[COLOR_ACCENT]
+Hex color for accents (e.g., #6C63FF, #00D4AA)
+
+💡 Tip: Use Claude (Sonnet or Opus) for best results. The prompt is optimized for long-form code generation. If using ChatGPT, use GPT-4 with a "write the complete file" follow-up if it truncates.
+The Foundation Prompt
+📋 Complete Prompt
+I want you to build me a Mission Control dashboard as a single HTML file. This is my personal command center for tracking my life and business.
+
+About Me:
+- Name: [YOUR_NAME]
+- Business/Role: [YOUR_BUSINESS] — [YOUR_ROLE]
+- Main Goal: [MAIN_GOAL] by [GOAL_DEADLINE]
+- Key Metric: [GOAL_METRIC]
+
+Technical Requirements:
+- Single self-contained HTML file (inline CSS + JS, no external dependencies except Google Fonts Inter)
+- Dark theme with glassmorphism: primary bg #050508, cards with backdrop-filter blur, subtle borders rgba(255,255,255,0.06)
+- Accent color: [COLOR_ACCENT] (use for highlights, active states, glows)
+- Font: Inter from Google Fonts
+- Fully responsive, smooth animations (fadeInUp on cards, pulse on status dot)
+- All data saved to localStorage so nothing is lost on refresh
+
+Layout:
+- Sticky frosted-glass header: logo/title left, tab navigation center, search bar + live status dot right
+- Tabs: 📊 Dashboard, 📋 Projects, 📅 Timeline, 📝 Notes
+- Main content max-width 1600px, centered, 2.5rem padding
+
+Dashboard Tab:
+- Welcome bar: "Good [morning/afternoon/evening], [NAME]" with live date/time
+- 4 metric cards in a grid: each with colored top accent bar (3px), icon, label, value, and trend indicator
+  Cards: [GOAL_METRIC] progress, Active Projects count, Tasks Today count, Days to Goal countdown
+- Activity feed: scrollable list of recent items with timestamps (stored in localStorage)
+- Top Priorities section: editable list with checkboxes, add new priority button
+
+Projects Tab:
+- Kanban board with 3 columns: Backlog, In Progress, Done
+- Task cards: title, description preview, priority badge (high/medium/low with colors), created date
+- Add task button per column, click card to edit, delete option
+- All tasks persisted to localStorage
+
+Timeline Tab:
+- Visual roadmap with phases displayed vertically
+- Each phase: title, date range, description, list of milestones with completion checkmarks
+- Current phase highlighted with accent glow
+- Data defined in a JS config object (easy to edit)
+
+Notes Tab:
+- Large textarea with markdown-style formatting
+- Auto-saves to localStorage on every keystroke
+- Character count, last saved timestamp
+- Clean minimal design
+
+Code Quality:
+- Clean, well-organized code with comments for each section
+- CSS variables for all colors/spacing (easy to re-theme)
+- Smooth transitions on all interactive elements
+- Keyboard shortcut: Cmd/Ctrl+K to focus search
+
+Build the complete file. Make it production quality — this should look like a premium SaaS dashboard, not a hobby project.
+Prompt 02
+The Modules
+
+Now that you have the foundation, add power modules. Each prompt adds a new tab to your existing dashboard.
+
+💡 How to use: Open a new conversation with your AI. Paste your existing mission-control.html file first, then paste the module prompt below it. The AI will return an updated file with the new tab integrated.
+💰 Module A: Revenue Tracker
+Track MRR, manage clients, visualize growth, and project annual revenue.
+Add a 💰 Revenue tab to my Mission Control. Include:
+- Monthly revenue goal with visual gauge (circular or bar)
+- Revenue chart showing last 6 months (simple bar chart, CSS-only or canvas)
+- Client list with: name, monthly value, status (active/pending/churned), start date
+- Add/edit/remove clients, auto-calculate MRR
+- Revenue projections section: if current MRR continues, show projected annual + monthly growth needed to hit goal
+- All data in localStorage
+- Match the existing dark glassmorphism theme and animation style
+🏢 Module B: AI Agent Command Center
+Manage your AI agents, track their activity, send tasks, and log executive decisions.
+Add a 🏢 Command Center tab to my Mission Control for managing my AI agents/team. Include:
+- Agent cards in a grid: each shows name, role/title, status (online/busy/offline with colored dots), model being used, last active timestamp
+- Click agent card to open a slide-out detail panel with: full description, capabilities list, recent activity log, performance notes
+- "Send Task" button that opens a modal with a text area (simulates sending tasks — saves to agent's activity log)
+- Executive Decisions section below agents: list of key decisions made with date, question asked, decision summary, which agents were consulted
+- Store all agent data in localStorage, include 3-4 sample agents to start
+🎬 Module C: YouTube Studio
+Plan video content, track growth milestones, and manage a content calendar.
+Add a 🎬 YouTube tab to my Mission Control for planning video content. Include:
+- Video ideas pipeline: cards with title, topic, status (idea/scripting/filming/editing/published), target publish date
+- Add/edit ideas, move between statuses
+- YouTube growth tracker: current sub count (editable), milestone levels with fun titles (e.g., "Rising Creator" at 1K, "Growth Engine" at 10K), XP-style progress bar to next milestone
+- Content calendar: simple month grid showing planned publish dates
+- All data in localStorage, match existing theme
+📞 Module D: Meeting Prep
+Never walk into a meeting unprepared. Track agendas, notes, and action items.
+Add a 📞 Meetings tab to my Mission Control. Include:
+- Upcoming meetings list: title, date/time, attendee(s), type (call/zoom/in-person), prep notes
+- Add/edit/delete meetings
+- Each meeting card expands to show: agenda items (editable checklist), notes textarea, action items that come out of it
+- Past meetings archive (auto-moves when date passes)
+- Today's meetings highlighted at top with countdown timers
+- localStorage persistence, match theme
+📡 Module E: Daily Intel Feed
+Curate your own intel feed — AI news, trends, competitor moves, and opportunities.
+Add a 📡 Intel tab to my Mission Control. Include:
+- Sections for different intel categories: AI News, Industry Trends, Competitor Watch, Opportunities
+- Each item: title, summary, source link, date added, importance tag (🔥 hot / ⚡ notable / 📌 reference)
+- Add new intel items with a simple form
+- Filter by category and importance
+- "Daily Brief" section at top: 3-5 most important items auto-sorted by date
+- localStorage persistence, match theme
+Prompt 03
+The Engine
+
+Make Mission Control a living dashboard. This prompt builds a lightweight Node.js server for live data, weather, and backup.
+📋 Complete Prompt
+I need a lightweight local server to power my Mission Control dashboard with live data. Build me a complete Node.js server with these specs:
+
+Setup:
+- Single file: server.js (or server.mjs)
+- Port: 8899
+- Serve my mission-control.html file at the root
+- CORS enabled for local development
+- No heavy frameworks — just built-in Node http/https modules (or Express if cleaner)
+
+API Endpoints:
+Create RESTful endpoints that Mission Control can fetch from:
+
+1. GET /mc/status — Returns system status:
+   - Server uptime, last data refresh timestamp, connection health: "online"
+
+2. GET /mc/data — Returns dashboard data:
+   - Read from a local JSON file (mc-data.json) that stores all dashboard state
+
+3. POST /mc/data — Save dashboard data:
+   - Accepts JSON body, writes to mc-data.json
+   - Lets Mission Control sync its localStorage to the server as backup
+
+4. GET /mc/weather?city=[CITY] — Fetch current weather:
+   - Use wttr.in API (free, no key): https://wttr.in/[CITY]?format=j1
+   - Return: temperature, condition, feels_like
+
+5. GET /mc/activity — Returns recent activity log:
+   - Read from mc-activity.json, returns last 50 entries
+
+6. POST /mc/activity — Add activity entry:
+   - Appends to mc-activity.json with timestamp
+
+Auto-start (macOS):
+Also generate a LaunchAgent plist file that auto-starts this server on login:
+- File: ~/Library/LaunchAgents/com.missioncontrol.server.plist
+- Points to the server.js file
+- Runs on load, restarts if crashed
+- Include the terminal commands to install it
+
+Setup instructions:
+Print clear step-by-step setup instructions:
+1. Save server.js to a folder
+2. Run `node server.js`
+3. Open http://localhost:8899
+4. (Optional) Install the LaunchAgent for auto-start
+
+Keep it simple. No database, no auth, no complexity. Just a clean local server that makes Mission Control come alive.
+Prompt 03 — Bonus
+Connecting Your Dashboard to the Server
+
+Once your server is running, use this mini-prompt to wire up your dashboard:
+⚡ Connection Prompt
+Update my mission-control.html to connect to the local server at http://localhost:8899. Add:
+
+1. On page load, fetch GET /mc/data and merge with localStorage (server = backup, localStorage = primary)
+2. Every 5 minutes, POST current localStorage state to /mc/data as backup
+3. Fetch weather from GET /mc/weather?city=[YOUR_CITY] and display temp + condition in the header next to the status dot
+4. When any data changes, POST to /mc/activity with a description of what changed
+5. Update the status dot: green = server connected, red = offline (fallback to localStorage-only mode)
+6. Add a small "Server: Online/Offline" indicator in the header
+
+Keep all existing localStorage functionality as the primary data layer. The server is a backup + data enrichment layer, not a replacement.
+
+💡 Pro tip: You don't need The Engine to use Mission Control. The HTML file works perfectly standalone. The server just adds superpowers — live weather, backup, and a clean localhost URL.
+
