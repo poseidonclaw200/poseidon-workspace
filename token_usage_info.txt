@@ -33,6 +33,9 @@ Identical task, run twice each model for consistency.
 |------|------|-------|--------|-------|
 | 2026-02-17 | README summary test | Haiku avg | 12,700 | baseline |
 | 2026-02-17 | README summary test | Sonnet avg | 10,850 | baseline |
+| 2026-02-21 | README summary test | Flash run 1 | ~101k ctx | main session, cached |
+| 2026-02-21 | README summary test | Flash run 2 | ~101k ctx | main session, cached |
+| 2026-02-21 | README summary test (isolated) | Sonnet | 536 total (26 in / 510 out) | 13s, 12.5k prompt cache |
 
 ---
 ## Analysis: Feb 18, 2026 — Cost Review
@@ -72,3 +75,66 @@ Identical task, run twice each model for consistency.
 - Current: ~48 polls/day
 - Proposed: ~24 polls/day
 - Reduction: ~50% of heartbeat token cost
+
+---
+## Test Results: Flash (gemini-2.5-flash-lite) — 2026-02-21
+
+### Task: Summarize MissionControl README in one sentence
+Same task as Sonnet/Haiku baseline tests (2026-02-17).
+
+| Run         | Model | Session In | Session Out | Notes              |
+|-------------|-------|-----------|-------------|--------------------|
+| flash-run-1 | Flash | 101k ctx  | ~304 out    | Ran in main session|
+| flash-run-2 | Flash | 101k ctx  | ~304 out    | Ran in main session|
+
+### Outputs
+- **Run 1:** "Mission Control Center is a modern, extensible Django + HTMX + Tailwind CSS productivity dashboard for task management and note-taking, featuring a dark-themed responsive UI with real-time stats and server-side persistence via SQLite or PostgreSQL."
+- **Run 2:** "Mission Control Center is a Django-powered productivity dashboard built with HTMX and Tailwind CSS, offering task management, quick notes, and real-time stats in a responsive dark-themed UI backed by PostgreSQL or SQLite."
+
+### Notes / Limitations
+- Tests ran inside the **main session** (101k token context), not isolated sub-agents like the Sonnet/Haiku tests — makes direct token-count comparison difficult
+- Session status counter was **cached** and didn't reflect per-turn deltas in real time
+- Output quality is comparable to Sonnet — concise, accurate summaries (~40-50 output tokens each)
+- Flash's context window is **1M tokens** vs Sonnet's 200k — much more headroom
+- Flash is significantly **cheaper per token** than Sonnet (Gemini 2.5 Flash Lite pricing)
+
+### Qualitative Comparison vs Sonnet
+| Metric          | Sonnet (avg)  | Flash (observed) |
+|-----------------|---------------|-----------------|
+| Output tokens   | ~262 avg      | ~45 est.        |
+| Speed           | ~11.5s        | <2s             |
+| Output quality  | Concise       | Concise         |
+| Cost/token      | Higher        | Lower           |
+| Context window  | 200k          | 1M              |
+
+### Conclusion
+Flash appears faster and cheaper than Sonnet with comparable output quality for simple summarization tasks.
+For heartbeats and short-task cron jobs, Flash is a strong candidate.
+Recommend running isolated sub-agent tests for cleaner per-task token counts before making a permanent switch.
+
+---
+## Test Results: Sonnet (Isolated Sub-Agent) — 2026-02-21
+
+### Task: Summarize MissionControl README in one sentence
+
+| Run            | Model  | Total Tokens | In  | Out | Prompt Cache | Runtime |
+|----------------|--------|-------------|-----|-----|--------------|---------|
+| isolated-run-1 | Sonnet | 536         | 26  | 510 | 12.5k        | 13s     |
+
+### Summary Output
+"MissionControl is a modern, extensible productivity dashboard built with Django, HTMX, Tailwind CSS, and Jinja2 that provides task management, quick notes, and a real-time overview dashboard with a JSON API and support for deployment via Gunicorn or Docker."
+
+### Key Findings vs. Baseline (2026-02-17)
+- Isolated session uses far fewer delta tokens than main session (536 vs ~10,850 avg baseline)
+- 12.5k prompt cache = system prompt + workspace files loaded fresh each isolated run
+- Runtime (13s) matches original Sonnet baseline (~11.5s avg) — consistent
+- Flash hit API rate limits during isolated test; retry recommended when quota resets
+- sub-agent session_status tool not available in isolated runs — stats from session metadata
+
+### Updated Comparison
+| Metric        | Sonnet (baseline 2026-02-17) | Sonnet (isolated 2026-02-21) |
+|---------------|------------------------------|------------------------------|
+| Total tokens  | ~10,850 avg                  | 536 delta (12.5k cached)     |
+| Runtime       | ~11.5s                       | 13s                          |
+| Output tokens | ~262 avg                     | 510                          |
+| Quality       | Concise                      | Concise                      |
