@@ -138,3 +138,36 @@ Recommend running isolated sub-agent tests for cleaner per-task token counts bef
 | Runtime       | ~11.5s                       | 13s                          |
 | Output tokens | ~262 avg                     | 510                          |
 | Quality       | Concise                      | Concise                      |
+TEST_TOKEN_USAGE
+
+---
+## Price Comparison: Sonnet 4.6 vs GPT-5-nano — 2026-02-23
+
+### Task: "I seem to have broken my command line on the vps. The last things I did were exporting PYENV and exporting PATH"
+Same prompt, run back-to-back with each model.
+
+### Token Estimates
+| Model            | Input ctx | Output tokens | Input cost   | Output cost  | Total cost  |
+|------------------|-----------|---------------|--------------|--------------|-------------|
+| Claude Sonnet 4.6| ~18,000   | ~306          | $0.05400     | $0.00459     | $0.05859    |
+| GPT-5-nano       | ~18,000   | ~493          | $0.00270     | $0.00030     | $0.00300    |
+
+### Pricing Used (per million tokens)
+- Claude Sonnet 4.6: $3.00 input / $15.00 output
+- GPT-5-nano: $0.15 input / $0.60 output (nano-tier estimate — web search unavailable at test time)
+
+### Key Findings
+- GPT-5-nano is ~95% cheaper per call than Sonnet 4.6 for this task
+- Nano produced a longer, more verbose response (~493 tokens vs ~306 for Sonnet)
+- Sonnet's response was more concise and structured; nano's was more exhaustive
+- Cost difference is driven almost entirely by the input context price ($3.00 vs $0.15/M)
+
+### Notes
+- GPT-5-nano pricing is an estimate; verify against official OpenAI pricing page
+- At large context windows (18k+), input cost dominates — nano's low input price is the key advantage
+- For heartbeats and short tasks with large context, nano could reduce costs significantly
+- Quality tradeoff: Sonnet more concise, nano more thorough (both acceptable for this task)
+
+### Recommendation
+GPT-5-nano is a strong candidate for cost-sensitive tasks (heartbeats, simple cron checks).
+Reserve Sonnet for tasks requiring high precision, code generation, or nuanced reasoning.

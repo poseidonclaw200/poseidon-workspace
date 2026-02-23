@@ -1,0 +1,1 @@
+[Heartbeat] Model: nano; Target: last; Verbosity cap: 60 tokens; Summary: brief heartbeat check
