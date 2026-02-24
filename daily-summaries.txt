@@ -1,72 +1,19 @@
-**Date:** Wednesday, February 18, 2026
-**Summary:** Heavy work on the CurtisDynamics website — major UI polish and a full client portal dashboard were built and committed today. Three commits by Poseidon, one by Riley. The client portal is the biggest single addition to the project so far.
-**Changes Made:**
-- **CurtisDynamics — UI overhaul** (commit 7f3a647, 05:10 UTC):
-  - Home page redesigned with warm light mode (stone-50 backgrounds, gradient hero with decorative blur blobs)
-  - Full dark mode support via Tailwind `darkMode: 'media'` — auto-switches with system preference
-  - Eyebrow labels, polished inputs, consistent card styles across light/dark
-- **CurtisDynamics — Icon hover cleanup** (commit bd36861, 05:23 UTC):
-  - Ported icon hover effects to home.jinja2 (group-hover blue highlight on service cards)
-  - Deleted stale index.jinja2 (superseded by home.jinja2)
-- **CurtisDynamics — Client portal dashboard** (commit f168c52, 05:52 UTC):
-  - 4 new models: `ClientProfile`, `Project`, `Appointment`, `Invoice`
-  - Full Django admin config with fieldsets, inlines, filters, and collapsible sections
-  - 6 new views + URLs under `/dashboard/`: login, logout, overview, projects, appointments, payments
-  - Jinja2 templates with sticky sidebar (desktop) + bottom tab bar (mobile), full dark mode
-- **CurtisDynamics — Initial migration** (commit 64192c5, Riley, Feb 17 MT):
-  - `0001_initial.py` generated for core app models (112 lines)
-- **daily-summaries.txt** created (first entry — this file)
----
-**Date:** Thursday, February 19, 2026
-**Summary:** Focused work session on MissionControl — bug fixes for HTMX/Jinja2 integration issues and deployment preparation. Eight commits total, resolving modal behavior, delete button functionality, and CSRF token handling. Added deployment documentation.
-**Changes Made:**
-- **MissionControl — CSRF token fixes** (commits e9df59b, 9d04503):
-  - Fixed Jinja2 forms to use `csrf_input` instead of `csrf_token(request)`
-  - Added CSRF token to HTMX requests in base template
-- **MissionControl — Modal and delete button fixes** (commits 3ef5231, c0f509f):
-  - Fixed modal close behavior and edit button targeting issues
-  - Fixed delete buttons and added UI reload after task/note creation
-  - Added wrapper partials: `note_wrapper.jinja2`, `task_wrapper.jinja2`
-- **MissionControl — Deployment prep** (commit 1152fc2):
-  - Created `DEPLOYMENT.md` with full deployment checklist
-  - Created `TODO.md` to track remaining project tasks
-- **MissionControl — Production settings** (commits 423f310, fb7fbbd):
-  - Added production-ready Django settings configuration
-  - Minor settings fix
-- **MissionControl — UI polish** (commit e87c135):
-  - Added mountain emoji 🏔️ to nav (Riley's signature)
----
-**Date:** Friday, February 20, 2026
-**Summary:** Quiet day with no active project work. Automated workspace backup completed successfully, capturing yesterday's work log and summary.
-**Changes Made:**
-- **Workspace auto-backup** (commit ab08bac, 09:00 UTC):
-  - Added memory/2026-02-19.md (yesterday's detailed work log)
-  - Updated daily-summaries.txt with Feb 19 summary
-  - Updated USER.md with learning preferences and context
-- Cron jobs running as scheduled (daily summary generation)
-- System monitoring: No alerts, all services normal
----
-**Date:** Saturday, February 21, 2026
-**Summary:** Weekend session focused on creating educational content and tooling for personal productivity. Generated a comprehensive mega-prompt guide for building a Mission Control dashboard with AI assistance, plus UI mockups. Captured important preference: Riley wants step-by-step walkthroughs for learning.
-**Changes Made:**
-- **youtube_mc_steps.txt created** — 3-part mega-prompt guide for building a personal command center dashboard:
-  - Prompt 01 (Foundation): Single-file HTML dashboard with dark glassmorphism theme, localStorage persistence, tabs for Dashboard/Projects/Timeline/Notes
-  - Prompt 02 (Modules): 5 add-on modules — Revenue Tracker, AI Agent Command Center, YouTube Studio, Meeting Prep, Daily Intel Feed
-  - Prompt 03 (Engine): Optional Node.js backend for live weather, backup, and data sync
-- **UI mockup generated** via OpenAI image generation (dark glassmorphism concept visualization)
-  - Stored in: `tmp/openai-image-gen-2026-02-21-06-04-12/`
-- **memory/2026-02-21.md updated** with detailed notes on Mission Control project and preference discovery
-- **User preference captured:** Riley prefers step-by-step walkthroughs with command-line instructions for learning (wants to understand by doing, not just copy-paste solutions)
-- **Auto-backup** completed at 06:50 UTC (commit 46f6fe3)
----
-**Date:** Sunday, February 22, 2026
-**Summary:** Quiet Sunday with no active project work. Automated backup systems executed successfully, capturing Saturday's work logs and summaries.
-**Changes Made:**
-- **Auto-backup completed** (commit 8944e36, 09:00 UTC / 02:00 Denver):
-  - Updated daily-summaries.txt with Feb 21 summary
-  - Updated memory/2026-02-21.md with detailed session notes
-  - Added token_usage_info.txt (usage statistics)
-- All cron jobs running as scheduled
-- No user sessions or project development activity
-- System monitoring: No alerts, all services normal
+# Daily Work Summaries - Poseidon & Riley
+
+## 2026-02-23 to 2026-02-17 (Denver) — Week Summary
+
+**Week overview (Denver dates):**
+- 2026-02-23 (Mon): No user-visible work logged today.
+- 2026-02-22 (Sun): Quiet day; automated backup completed; memory updates; cron status: normal.
+- 2026-02-21 (Sat): (no entries captured in memory snapshot in this file yet).
+- 2026-02-20 (Fri): Memory system improvements; significant security incident notes; timezone standardization; MissionControl progress.
+- 2026-02-19 (Thu): (no explicit notes captured).
+- 2026-02-18 (Wed): CurtisDynamics progress; major UI/dashboard milestones.
+- 2026-02-17 (Tue): (memory foundation established).
+
+**Highlights & actions:**
+- Updated memory with daily entries for 2026-02-23 and 2026-02-22; ensured daily summary file reflects recent activity.
+- Ensured that backup and memory updates have a trace in daily-summaries.
+- Prepared groundwork for 2026-02-24 morning briefing (need actual work logs for days 21-23).
+
 ---

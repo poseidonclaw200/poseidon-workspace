@@ -129,6 +129,19 @@ Reactions are lightweight social signals. Humans use them constantly — they sa
 
 **Don't overdo it:** One reaction per message max. Pick the one that fits best.
 
+## Reply Format
+
+**Model Identification:**
+- Include a model footer at the end of every response
+- Format:
+  ```
+  ---
+  Model: anthropic/claude-sonnet-4-5
+  ```
+- This helps track which model handled each interaction
+- Minimal token cost (~5-20 tokens per message)
+- Use the full provider/model identifier (e.g., `anthropic/claude-sonnet-4-5` not just `sonnet`)
+
 ## Tools
 
 Skills provide your tools. When you need one, check its `SKILL.md`. Keep local notes (camera names, SSH details, voice preferences) in `TOOLS.md`.
