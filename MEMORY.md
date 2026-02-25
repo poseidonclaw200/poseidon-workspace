@@ -26,7 +26,7 @@
 - Delivery: Telegram notifications
 
 ### OpenClaw Configuration
-- **Primary model:** Sonnet (anthropic/claude-sonnet-4-5)
+- **Primary model:** Mini (openai/gpt-5-mini)
 - **Fallback:** Haiku (anthropic/claude-haiku-4-5)
 - **Gateway:** Loopback-bound (local only, not exposed)
 - **Channels:** Telegram enabled
@@ -58,10 +58,10 @@
 
 ### MissionControl (Started Feb 16, 2026)
 - **Purpose:** Central hub to track work together and plan future projects
-- **Tech:** Django app (Python) with SQLite database
+- **Tech:** Django app (Python) with Postgres Database
 - **Location:** `~/Projects/MissionControl` on VPS
 - **Status:** Actively being improved
-- **Sync:** Shared git repo — changes made on Riley's home computer are visible to me on the VPS
+- **Sync:** Shared git repo —
 - **Role:** We build this together, iterating to make it better over time
 
 ### CurtisDynamics — Riley's Business Website (Feb 18, 2026)
